@@ -20,6 +20,16 @@ void insertAtHead(Node *&head, int data)
     head = temp;
 }
 
+void printLinkedList(Node *&head)
+{
+    Node *temp = head;
+    while (temp != NULL)
+    {
+        cout << temp->data << " ";
+        temp = temp->ptr;
+    }
+}
+
 int main()
 {
     Node *head = new Node(2);
@@ -28,12 +38,10 @@ int main()
 
     head->ptr = node2;
     node2->ptr = node3;
-
-    cout << head->data << endl;
-
+    printLinkedList(head);
+    cout << endl;
     insertAtHead(head, 0);
-
-    cout << head->data << endl;
+    printLinkedList(head);
 
     return 0;
 }
