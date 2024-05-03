@@ -23,16 +23,16 @@ void printLinkedList(Node *ptr)
         // cout << ptr->next << endl;
     }
 }
-// void insertAtHead(Node *LinkLList, Node *node)
-// {
-//     while (LinkLList->next != NULL)
-//     {
-//         LinkLList = LinkLList->next;
-//     }
-//     LinkLList->next = node;
-//     cout << LinkLList->next->data << endl;
-//     node->next = NULL;
-// }
+void insertAtHead(Node *LinkLList, Node *node)
+{
+    while (LinkLList->next != NULL)
+    {
+        LinkLList = LinkLList->next;
+    }
+    LinkLList->next = node;
+    cout << LinkLList->next->data << endl;
+    node->next = NULL;
+ }
 
 int main()
 {
