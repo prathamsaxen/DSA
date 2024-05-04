@@ -1,15 +1,16 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-class Node{
-    public:
+class Node
+{
+public:
     int data;
     Node *next;
 
     Node(int data)
     {
-        this->data=data;
-        this->next=NULL;
+        this->data = data;
+        this->next = NULL;
     }
 };
 
@@ -23,35 +24,45 @@ void printLinkedList(Node *&head)
     }
 }
 
-void DeleteAtPosition(Node *&head,int position)
+void DeleteAtPosition(Node *&head, int position)
 {
-    int index=1;
+    int index = 1;
     Node *temp = head;
-    while(index<=position)
+    if (position == 1)
+    {
+        Node *deletingNode = head;
+        head = head->next;
+        delete deletingNode;
+        return;
+    }
+    while (index < position - 1)
     {
         index++;
-        temp=temp->next;
+        temp = temp->next;
     }
-    Node* Previos=temp;
-    temp=temp->next;
-    Previos->next=temp->next;
+    // cout << temp->data << " ";
+    Node *previousNode = temp;
+    Node *deletingNode = temp->next;
+    Node *nextNode = temp->next;
+    nextNode = nextNode->next;
+    previousNode->next = nextNode;
+    // cout<<deletingNode->data<<endl;
+    delete deletingNode;
 }
 
 int main()
 {
-    Node *head=new Node(1);
-    Node *node2=new Node(2);
-    Node *node3=new Node(3);
-    Node *node4=new Node(4);
-    head->next=node2;
-    node2->next=node3;
-    node3->next=node4;
+    Node *head = new Node(1);
+    Node *node2 = new Node(2);
+    Node *node3 = new Node(3);
+    Node *node4 = new Node(4);
+    head->next = node2;
+    node2->next = node3;
+    node3->next = node4;
     printLinkedList(head);
-    DeleteAtPosition(head,3);
     cout<<endl;
+    DeleteAtPosition(head, 2);
+    cout << endl;
     printLinkedList(head);
-
-
-
     return 0;
 }
