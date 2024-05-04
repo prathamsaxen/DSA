@@ -12,6 +12,14 @@ public:
         this->data = data;
         this->next = NULL;
     }
+    ~Node()
+    {
+        cout << "Deleting -> " << this->data << endl;
+        if (this->next == NULL)
+        {
+            delete this;
+        }
+    }
 };
 
 void printLinkedList(Node *&head)
@@ -32,6 +40,7 @@ void DeleteAtPosition(Node *&head, int position)
     {
         Node *deletingNode = head;
         head = head->next;
+        deletingNode->next = NULL;
         delete deletingNode;
         return;
     }
@@ -60,7 +69,7 @@ int main()
     node2->next = node3;
     node3->next = node4;
     printLinkedList(head);
-    cout<<endl;
+    cout << endl;
     DeleteAtPosition(head, 2);
     cout << endl;
     printLinkedList(head);
