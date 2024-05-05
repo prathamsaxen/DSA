@@ -23,8 +23,11 @@ public:
     }
     ~DoublyLinkedListNode()
     {
-        cout << "Deleting node -> " << this->data << endl;
-        delete this;
+        //    std::cout << "Deleting node -> " << this->data << endl;
+        // delete this;
+        int val = this->data;
+        std::cout << "Deleting Node -> " << val << endl;
+        std::cout << "Deleting Pointer -> " << next << endl;
     }
 };
 
@@ -33,7 +36,7 @@ void printDoublyLinkedList(DoublyLinkedListNode *head)
     DoublyLinkedListNode *temp = head;
     while (temp != NULL)
     {
-        cout << temp->data << " ";
+        std::cout << temp->data << " ";
         temp = temp->next;
     }
 }
@@ -75,9 +78,9 @@ void InsertAtPosition(DoublyLinkedListNode *&head, int data, int position)
     if (position == 1)
     {
         DoublyLinkedListNode *newNode = new DoublyLinkedListNode(data, NULL);
-        // cout<<newNode->data;
-        // cout<<newNode->next;
-        // cout<<newNode->previous;
+        // std::cout<<newNode->data;
+        // std::cout<<newNode->next;
+        // std::cout<<newNode->previous;
         // return;
         newNode->previous = NULL;
         newNode->next = head;
@@ -93,23 +96,57 @@ void InsertAtPosition(DoublyLinkedListNode *&head, int data, int position)
         temp = temp->next;
         count++;
     }
-    // cout << count << endl;
-    // cout << temp->data << endl;
+    // std::cout << count << endl;
+    // std::cout << temp->data << endl;
     DoublyLinkedListNode *newNode = new DoublyLinkedListNode(data, temp);
     newNode->next = temp->next;
     temp->next = newNode;
 }
-void DeletionAtHead(DoublyLinkedListNode *&head)
+void DeletionAtPosition(DoublyLinkedListNode *&head, int Position)
 {
-    if (head->next != NULL)
+    int length = LengthOfDoublyLinkedList(head);
+    if (Position == 1)
     {
         DoublyLinkedListNode *temp = head;
-        head = head->next;
+        temp->next->previous = NULL;
+        head = temp->next;
+        temp->next = NULL;
         delete temp;
     }
     else
     {
-        delete head;
+        if (Position == length)
+        {
+            // Handle deletion at the end
+            // std::cout << "Here" << endl;
+            DoublyLinkedListNode *temp = head;
+            while (temp->next != NULL)
+            {
+                temp = temp->next;
+            }
+            DoublyLinkedListNode *lastNode = temp->previous;
+            lastNode->next = NULL;
+            temp->previous = NULL;
+            delete temp;
+        }
+        else
+        {
+            int count = 1;
+            DoublyLinkedListNode *temp = head;
+            while (count < Position - 1)
+            {
+                temp = temp->next;
+                count++;
+            }
+            DoublyLinkedListNode *nextComingNode = temp->next;
+            nextComingNode = nextComingNode->next;
+            temp->next = nextComingNode;
+            DoublyLinkedListNode *deletionNode = nextComingNode;
+            deletionNode = deletionNode->previous;
+            deletionNode->next = NULL;
+            deletionNode->previous = NULL;
+            nextComingNode->previous = temp;
+        }
     }
 }
 
@@ -128,28 +165,32 @@ int main()
 
     printDoublyLinkedList(node1);
     InsertionAtHead(node1, 0);
-    cout << endl;
+    std::cout << endl;
     printDoublyLinkedList(node1);
     // InsertionAtHead(node1, -2);
-    // cout << endl;
+    // std::cout << endl;
     printDoublyLinkedList(node1);
-    cout << endl;
-    // cout << LengthOfDoublyLinkedList(node1);
+    std::cout << endl;
+    // std::cout << LengthOfDoublyLinkedList(node1);
 
-    cout << "Printing Linked List" << endl;
+    std::cout << "Printing Linked List" << endl;
     printDoublyLinkedList(node1);
 
     InsertAtTail(node1, 10);
-    cout << endl;
+    std::cout << endl;
     printDoublyLinkedList(node1);
-    cout << endl;
+    std::cout << endl;
 
     InsertAtPosition(node1, 55, 7);
     printDoublyLinkedList(node1);
 
-    cout<<endl;
-    // DeletionAtHead(node1);
+    std::cout << endl;
+    DeletionAtPosition(node1, 7);
     printDoublyLinkedList(node1);
+
+    // std::cout << endl;
+    // DeletionAtPosition(node1, 1);
+    // printDoublyLinkedList(node1);
 
     return 0;
 }
