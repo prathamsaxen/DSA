@@ -23,11 +23,14 @@ public:
     }
     ~DoublyLinkedListNode()
     {
-        //    std::cout << "Deleting node -> " << this->data << endl;
-        // delete this;
-        int val = this->data;
-        std::cout << "Deleting Node -> " << val << endl;
-        std::cout << "Deleting Pointer -> " << next << endl;
+        // int val = this->data;
+        // std::cout << "Deleting Node -> " << val << endl;
+        // std::cout << "Deleting Pointer -> " << next << endl;
+
+        if(this->next == NULL && this->previous==NULL)
+        {
+            std::cout<<"Delete === "<<this->data << endl;
+        }
     }
 };
 
