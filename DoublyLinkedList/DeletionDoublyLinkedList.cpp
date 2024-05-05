@@ -27,9 +27,11 @@ public:
         // std::cout << "Deleting Node -> " << val << endl;
         // std::cout << "Deleting Pointer -> " << next << endl;
 
-        if(this->next == NULL && this->previous==NULL)
+        if (this->next != NULL)
         {
-            std::cout<<"Delete === "<<this->data << endl;
+            // std::cout << next;
+            delete next;
+            this->next = NULL;
         }
     }
 };
