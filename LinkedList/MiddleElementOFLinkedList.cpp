@@ -44,6 +44,35 @@ void ReverseLinkedList(Node *&head)
     head = previous;
 }
 
+int getLength(Node *head)
+{
+    if (head == NULL)
+    {
+        return 0;
+    }
+    int count = 0;
+    while (head != NULL)
+    {
+        count++;
+        head = head->ptr;
+    }
+    return count;
+}
+
+int middleElementLinkedList(Node *head)
+{
+    int middle = (getLength(head) / 2) + 1;
+    // return middle;
+    int count = 1;
+    while (count != middle)
+    {
+        head = head->ptr;
+        count++;
+    }
+    return head->data;
+}
+
+
 int main()
 {
     Node *head = new Node(2);
@@ -56,8 +85,9 @@ int main()
     cout << endl;
     insertAtHead(head, 0);
     printLinkedList(head);
-    cout << "Reverse" << endl;
-    ReverseLinkedList(head);
-    printLinkedList(head);
+    // cout << "Reverse" << endl;
+    cout << "Length of Linked List -> " << getLength(head) << endl;
+    cout << "Middle Element Index = " << middleElementLinkedList(head) << endl;
+    // printLinkedList(head);
     return 0;
 }
