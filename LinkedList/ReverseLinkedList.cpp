@@ -32,17 +32,16 @@ void printLinkedList(Node *&head)
 
 void ReverseLinkedList(Node *&head)
 {
-    Node *temp = head;
-    while (temp->ptr != NULL)
+    Node *previous = NULL;
+    Node *current = head;
+    while (current != NULL)
     {
-        Node *curent = temp;
-        temp = temp->ptr;
-        Node *current2 = temp;
-        current2->ptr = curent;
+        Node *next = current->ptr;
+        current->ptr = previous;
+        previous = current;
+        current = next;
     }
-    cout << temp->data << endl;
-    head->ptr=NULL;
-    head=temp;
+    head = previous;
 }
 
 int main()
