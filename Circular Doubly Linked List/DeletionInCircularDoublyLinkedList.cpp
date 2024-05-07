@@ -17,7 +17,7 @@ public:
     ~DoublyLinkedList()
     {
         cout << "Deleted " << this->data << endl;
-         if (this->next == NULL)
+        if (this->next == NULL)
         {
             delete this;
         }
@@ -90,9 +90,8 @@ int main()
     InsertionAtDoublyLinkedList(node1, 0, 3);
     TraversalDoublyLinkedList(node1);
 
-    DeletionAtDoublyCircularLinkedList(node1,0);
+    DeletionAtDoublyCircularLinkedList(node1, 0);
     TraversalDoublyLinkedList(node1);
-
 
     return 0;
 }
