@@ -72,7 +72,17 @@ int middleElementLinkedList(Node *head)
     return head->data;
 }
 
-
+int middleElementLinkedListUsingTwoPointerApproach(Node *head)
+{
+    Node *FastPointer = head;
+    Node *SlowPointer = head;
+    while(FastPointer!=NULL && FastPointer->ptr != NULL)
+    {
+        FastPointer = FastPointer->ptr->ptr;
+        SlowPointer = SlowPointer->ptr;
+    }
+    return SlowPointer->data;
+}
 int main()
 {
     Node *head = new Node(2);
@@ -87,7 +97,7 @@ int main()
     printLinkedList(head);
     // cout << "Reverse" << endl;
     cout << "Length of Linked List -> " << getLength(head) << endl;
-    cout << "Middle Element Index = " << middleElementLinkedList(head) << endl;
+    cout << "Middle Element Index = " << middleElementLinkedListUsingTwoPointerApproach(head) << endl;
     // printLinkedList(head);
     return 0;
 }
