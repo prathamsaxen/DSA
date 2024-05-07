@@ -74,9 +74,11 @@ int middleElementLinkedList(Node *head)
 
 int middleElementLinkedListUsingTwoPointerApproach(Node *head)
 {
+    if (head == NULL || head->ptr == NULL)
+        return head->data;
     Node *FastPointer = head;
     Node *SlowPointer = head;
-    while(FastPointer!=NULL && FastPointer->ptr != NULL)
+    while (FastPointer != NULL && FastPointer->ptr != NULL)
     {
         FastPointer = FastPointer->ptr->ptr;
         SlowPointer = SlowPointer->ptr;
