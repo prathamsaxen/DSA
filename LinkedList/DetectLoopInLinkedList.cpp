@@ -100,17 +100,21 @@ Node *ReverLinkedListInKGroups(Node *head, int K)
 
 bool detectLoopUsingFloydCycle(Node *head)
 {
+    if (head == NULL)
+        return false;
     Node *slow = head;
     Node *fast = head;
 
-    while (fast != NULL)
+    while (slow != NULL && fast != NULL)
     {
+        fast = fast->ptr;
+        if (fast != NULL)
+            fast = fast->ptr;
+        slow = slow->ptr;
         if (slow == fast)
         {
             return true;
         }
-        fast = fast->ptr->ptr;
-        slow = slow->ptr;
     }
     return false;
 }
@@ -133,7 +137,7 @@ int main()
 
     printLinkedList(head);
     // head = ReverLinkedListInKGroups(head, 3);
-    // node2->ptr = head;
+    node2->ptr = head;
     cout << endl;
     // printLinkedList(newhead);
     cout << detectLoopUsingFloydCycle(head) << endl;
