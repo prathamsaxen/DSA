@@ -64,6 +64,7 @@ bool detectLoop(Node *head)
     {
         if (visited[temp] == true)
         {
+            cout << "LOOP DETECTED: " << temp->data << endl;
             return true;
         }
         visited[temp] = true;
@@ -112,10 +113,11 @@ int main()
     insertAtHead(head, -4);
     insertAtHead(head, -6);
     insertAtHead(head, -8);
-    // node2->ptr = head;
-    // printLinkedList(head);
-    cout << endl;
-    // Node *newhead = ReverLinkedListInKGroups(head, 3);
+
+    printLinkedList(head);
+    // head = ReverLinkedListInKGroups(head, 3);
+    node2->ptr = head;
+    cout<<endl;
     // printLinkedList(newhead);
     cout << detectLoop(head) << endl;
 
