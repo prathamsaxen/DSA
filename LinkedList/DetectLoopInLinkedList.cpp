@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <map>
 using namespace std;
 
 class Node
@@ -55,8 +56,21 @@ void ReverseLinkedListUsingRecursion(Node *&head, Node *Current, Node *Previous)
     ReverseLinkedListUsingRecursion(head, Current->ptr, Current);
     Current->ptr = Previous;
 }
-// NULL 1 2
-//  P   C N
+bool detectLoop(Node *head)
+{
+    map<Node *, bool> visited;
+    Node *temp = head;
+    while (temp != NULL)
+    {
+        if (visited[temp] == true)
+        {
+            return true;
+        }
+        visited[temp] = true;
+        temp = temp->ptr;
+    }
+    return false;
+}
 Node *ReverLinkedListInKGroups(Node *head, int K)
 {
     Node *previous = NULL;
@@ -98,15 +112,12 @@ int main()
     insertAtHead(head, -4);
     insertAtHead(head, -6);
     insertAtHead(head, -8);
-
-    printLinkedList(head);
-    // cout << "Reverse" << endl;
-    // ReverseLinkedList(head);
+    // node2->ptr = head;
     // printLinkedList(head);
-    // cout << "Again!" << endl;
     cout << endl;
-    Node *newhead = ReverLinkedListInKGroups(head, 3);
-    printLinkedList(newhead);
+    // Node *newhead = ReverLinkedListInKGroups(head, 3);
+    // printLinkedList(newhead);
+    cout << detectLoop(head) << endl;
 
     return 0;
 }
