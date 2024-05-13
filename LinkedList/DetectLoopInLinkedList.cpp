@@ -119,6 +119,36 @@ bool detectLoopUsingFloydCycle(Node *head)
     return false;
 }
 
+Node *detectStartingNodeOfLoopInLinkedList(Node *head)
+{
+    Node *slow = head;
+    Node *fast = head;
+
+    bool loopDetect = false;
+    while (slow != NULL && fast != NULL)
+    {
+        fast = fast->ptr;
+        if (fast != NULL)
+            fast = fast->ptr;
+        slow = slow->ptr;
+        if (slow == fast)
+        {
+            loopDetect = true;
+            break;
+        }
+    }
+    if (loopDetect == true)
+    {
+        slow = head;
+        while (slow != fast)
+        {
+            slow = slow->ptr;
+            fast = fast->ptr;
+        }
+        return slow;
+    }
+    return NULL;
+}
 int main()
 {
     Node *head = new Node(2);
@@ -137,10 +167,19 @@ int main()
 
     printLinkedList(head);
     // head = ReverLinkedListInKGroups(head, 3);
-    node2->ptr = head;
+    // node2->ptr = node2;
     cout << endl;
     // printLinkedList(newhead);
     cout << detectLoopUsingFloydCycle(head) << endl;
+    Node *startingNode = detectStartingNodeOfLoopInLinkedList(head);
+    if (startingNode != NULL)
+    {
+        cout << "Starting Node of Loop ->" << startingNode->data << endl;
+    }
+    else
+    {
+        cout << "No Loop Detected!" << endl;
+    }
 
     return 0;
 }
