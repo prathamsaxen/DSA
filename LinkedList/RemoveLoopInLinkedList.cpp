@@ -225,7 +225,15 @@ int main()
 
     bool removeLoop = DetectAndRemoveLoopFromLinkedList(head);
     cout << "Remove LOOP ->" << removeLoop << endl;
-    printLinkedList(head);
-
+    // printLinkedList(head);
+    startingNode = detectStartingNodeOfLoopInLinkedList(head);
+    if (startingNode != NULL)
+    {
+        cout << "Starting Node of Loop ->" << startingNode->data << endl;
+    }
+    else
+    {
+        cout << "No Loop Detected!" << endl;
+    }
     return 0;
 }
