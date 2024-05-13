@@ -125,6 +125,11 @@ Node *detectStartingNodeOfLoopInLinkedList(Node *head)
     Node *fast = head;
 
     bool loopDetect = false;
+
+    if (head == NULL)
+    {
+        return NULL;
+    }
     while (slow != NULL && fast != NULL)
     {
         fast = fast->ptr;
