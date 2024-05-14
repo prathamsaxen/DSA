@@ -5,7 +5,7 @@ class ListNode
 {
     public:
     int val;
-    ListNode next;
+    ListNode* next;
 private:
     ListNode *getMiddle(ListNode *head)
     {
