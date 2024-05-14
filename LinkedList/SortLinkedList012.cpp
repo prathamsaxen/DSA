@@ -72,6 +72,61 @@ void SortLinkedList012(Node *&head)
         count++;
     }
 }
+Node *SortLinkedListFor012WithoutChangingData(Node *&head)
+{
+    Node *temp = head;
+    Node *Zero = NULL;
+    Node *ZeroTail = Zero;
+    Node *One = NULL;
+    Node *OneTail = One;
+    Node *Two = NULL;
+    Node *TwoTail = Two;
+
+    while (temp != NULL)
+    {
+        if (temp->data == 0)
+        {
+            if (ZeroTail == NULL)
+            {
+                Zero = temp;
+            }
+            else
+            {
+                Zero->next = temp;
+                ZeroTail = ZeroTail->next;
+            }
+        }
+        else if (temp->data == 1)
+        {
+            if (OneTail == NULL)
+            {
+                One = temp;
+            }
+            else
+            {
+                One->next = temp;
+                OneTail = OneTail->next;
+            }
+        }
+        else if (temp->data == 2)
+        {
+            if (TwoTail == NULL)
+            {
+                Two = temp;
+            }
+            else
+            {
+                Two->next = temp;
+                TwoTail = TwoTail->next;
+            }
+        }
+        temp = temp->next;
+    }
+    ZeroTail->next = One;
+    OneTail->next = Two;
+    TwoTail->next = NULL;
+    return Zero;
+}
 int main()
 {
     Node *head = new Node(2);
@@ -89,7 +144,8 @@ int main()
     node5->next = node6;
     printLinkedList(head);
     cout << endl;
-    SortLinkedList012(head);
-    printLinkedList(head);
+    Node *sorted=SortLinkedListFor012WithoutChangingData(head);
+    // SortLinkedList012(head);
+    printLinkedList(sorted);
     return 0;
 }
