@@ -72,60 +72,49 @@ void SortLinkedList012(Node *&head)
         count++;
     }
 }
+
+void insertAtTail(Node *&Tail, Node *Current)
+{
+    Tail->next = Current;
+    Tail = Current;
+}
+
 Node *SortLinkedListFor012WithoutChangingData(Node *&head)
 {
     Node *temp = head;
-    Node *Zero = NULL;
+    Node *Zero = new Node(-1);
     Node *ZeroTail = Zero;
-    Node *One = NULL;
+    Node *One = new Node(-1);
     Node *OneTail = One;
-    Node *Two = NULL;
+    Node *Two = new Node(-1);
     Node *TwoTail = Two;
 
     while (temp != NULL)
     {
         if (temp->data == 0)
         {
-            if (ZeroTail == NULL)
-            {
-                Zero = temp;
-            }
-            else
-            {
-                Zero->next = temp;
-                ZeroTail = ZeroTail->next;
-            }
+            insertAtTail(ZeroTail, temp);
+            // cout << "Entered => temp-> data" << temp->data << endl;
         }
         else if (temp->data == 1)
         {
-            if (OneTail == NULL)
-            {
-                One = temp;
-            }
-            else
-            {
-                One->next = temp;
-                OneTail = OneTail->next;
-            }
+            insertAtTail(OneTail, temp);
+            // cout << "Entered => temp-> data" << temp->data << endl;
         }
         else if (temp->data == 2)
         {
-            if (TwoTail == NULL)
-            {
-                Two = temp;
-            }
-            else
-            {
-                Two->next = temp;
-                TwoTail = TwoTail->next;
-            }
+            insertAtTail(TwoTail, temp);
+            // cout << "Entered => temp-> data" << temp->data << endl;
         }
         temp = temp->next;
     }
-    ZeroTail->next = One;
-    OneTail->next = Two;
+    // cout<<"One"<<One->data;
+    // cout<<"One"<<One->next->data;
+    Node *Newhead = Zero->next;
+    ZeroTail->next = One->next;
+    OneTail->next = Two->next;
     TwoTail->next = NULL;
-    return Zero;
+    return Newhead;
 }
 int main()
 {
@@ -135,7 +124,6 @@ int main()
     Node *node4 = new Node(1);
     Node *node5 = new Node(0);
     Node *node6 = new Node(2);
-    // Node *node7 = new Node(1);
 
     head->next = node2;
     node2->next = node3;
@@ -144,8 +132,7 @@ int main()
     node5->next = node6;
     printLinkedList(head);
     cout << endl;
-    Node *sorted=SortLinkedListFor012WithoutChangingData(head);
-    // SortLinkedList012(head);
+    Node *sorted = SortLinkedListFor012WithoutChangingData(head);
     printLinkedList(sorted);
     return 0;
 }
