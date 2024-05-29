@@ -1,18 +1,27 @@
 #include <iostream>
 #include <stack>
-
+#include <vector>
 using namespace std;
-stack<int> NextSmallestNumberWithOptimizedSolution(int arr[], int size)
+vector<int> NextSmallestNumberWithOptimizedSolution(int arr[], int size)
 {
-    stack<int> ans;
-    ans.push(-1);
-    for (int i = size - 1; i > 0; i--)
+    vector<int> ans(size);
+    stack<int> data;
+
+    for (int index = size - 1; index >= 0; index--)
     {
-        while (ans.top() >= arr[i])
+        while (!data.empty() && data.top() > arr[index])
         {
-            ans.pop();
+            data.pop();
         }
-        ans.push(ans.top());
+        if (data.empty())
+        {
+            ans[index] = -1;
+        }
+        else
+        {
+            ans[index] = data.top();
+        }
+        data.push(arr[index]);
     }
     return ans;
 }
@@ -26,12 +35,11 @@ void print(int arr[], int size)
 int main()
 {
     int arr[] = {2, 3, 1, 4};
-    print(arr, 4);
-    stack<int> data = NextSmallestNumberWithOptimizedSolution(arr, 4);
-    while (!data.empty())
+    // print(arr, 4);
+    vector<int> data = NextSmallestNumberWithOptimizedSolution(arr, 4);
+    for (int i = 0; i < data.size(); i++)
     {
-        cout << data.top() << endl;
-        data.pop();
+        cout << data[i] << endl;
     }
     return 0;
 }
