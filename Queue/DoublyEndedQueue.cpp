@@ -34,7 +34,7 @@ public:
         {
             front = back = 0;
         }
-        else if (front == 0)
+        else if (front == 0 && back != max_capacity - 1)
         {
             front = max_capacity - 1;
         }
@@ -59,5 +59,11 @@ public:
         {
             back = 0;
         }
+        else
+        {
+            back++;
+        }
+        arr[back] = data_input;
+        return true;
     }
 };
