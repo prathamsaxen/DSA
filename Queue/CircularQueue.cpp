@@ -6,7 +6,7 @@ using namespace std;
 
 class MyCircularQueue {
 private:
-    int* arr;
+    int* arr; 
     int front;
     int rear;
     int max_capacity;
